@@ -37,10 +37,46 @@ def print_board():
         print " ".join(row)
 
 
+def print_winner(current_player):  #Should be static
+    if current_player == 'X':
+        print 'Player 1, WON!!!!!!'
+
+    else:
+        print 'Player 2, WON!!!!!!'
+
+
+def get_board(board):  #Should be static
+    new_board = []
+    for a in board:
+        new_board.extend(a)
+    return new_board
+
+
+def get_winner(new_board, current_player, *args):
+    combinations = [new_board[0:3], new_board[3:6], new_board[6:9], new_board[0:7:3], new_board[1:8:3],
+                    new_board[2:9:3], new_board[::4], new_board[2:8:2]]
+    count = 0
+
+    for combination in combinations:
+        if len(set(combination)) == 1 and set(combination).__contains__(current_player):
+            return print_winner(current_player), exit(0)
+        elif len(set(combination)) >= 2 and set(combination).__contains__('X') and set(combination).__contains__('O'):
+            count += 1
+            while count == 8:
+                return 'There is no way to WIN'
+
+
 for current_player in itertools.cycle(sign):
     get_player()
-    selected_field = get_field(board)
+    get_field(board)
     print_board()
+    new_board = get_board(board)
+    get_winner(new_board, current_player, 'X', 'O')
+
+
+
+
+
 
 
 
