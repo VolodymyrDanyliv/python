@@ -59,9 +59,9 @@ def get_winner(new_board, current_player, *args):
     count = 0
 
     for combination in combinations:
-        if len(set(combination)) == 1 and set(combination).__contains__(current_player):
+        if len(set(combination)) == 1 and combination.__contains__(current_player):
             return print_winner(current_player), exit(0)
-        elif len(set(combination)) >= 2 and set(combination).__contains__('X') and set(combination).__contains__('O'):
+        elif len(set(combination)) >= 2 and combination.__contains__('X') and combination.__contains__('O'):
             count += 1
             while count == 8:
                 return 'There is no way to WIN'
