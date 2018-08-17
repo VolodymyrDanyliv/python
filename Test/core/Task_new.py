@@ -53,18 +53,23 @@ def get_board(board):  #Should be static
     return new_board
 
 
-def get_winner(new_board, current_player, *args):
+def get_winner(new_board, current_player):
     combinations = [new_board[0:3], new_board[3:6], new_board[6:9], new_board[0:7:3], new_board[1:8:3],
                     new_board[2:9:3], new_board[::4], new_board[2:8:2]]
-    count = 0
-
+    #count = 0
     for combination in combinations:
         if len(set(combination)) == 1 and combination.__contains__(current_player):
             return print_winner(current_player), exit(0)
-        elif len(set(combination)) >= 2 and combination.__contains__('X') and combination.__contains__('O'):
-            count += 1
-            while count == 8:
-                return 'There is no way to WIN', exit(0)
+    # if attempts == 8:
+    #     print 'There is no way to WIN, just one choice'
+    # elif attempts == 9:
+    #     print 'The END'
+    #     return exit(0)
+        elif len(set(combination)) >= 2 and not combination.__contains__(default_sign):
+            #count += 1
+            while attempts == 8:
+                print 'There is no combinations to WIN'
+                return exit(0)
 
 
 for current_player in itertools.cycle(sign):
@@ -74,7 +79,7 @@ for current_player in itertools.cycle(sign):
     new_board = get_board(board)
     attempts += 1
     while attempts >= 5:
-        get_winner(new_board, current_player, 'X', 'O')
+        get_winner(new_board, current_player)
         break
 
 
