@@ -6,6 +6,7 @@ default_sign = '_'
 board = [['_', '_', '_'],
          ['_', '_', '_'],
          ['_', '_', '_']]
+attempts = 0
 
 
 def get_player():
@@ -71,7 +72,10 @@ for current_player in itertools.cycle(sign):
     get_field(board)
     print_board()
     new_board = get_board(board)
-    get_winner(new_board, current_player, 'X', 'O')
+    attempts += 1
+    while attempts >= 5:
+        get_winner(new_board, current_player, 'X', 'O')
+        break
 
 
 
