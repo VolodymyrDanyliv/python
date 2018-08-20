@@ -45,16 +45,17 @@ def get_winner(board, current_player, attempts):
     for a in board:
         new_board.extend(a)
 
+    '''Combinations to WIN below'''
     combinations = [new_board[0:3], new_board[3:6], new_board[6:9], new_board[0:7:3], new_board[1:8:3],
                     new_board[2:9:3], new_board[::4], new_board[2:8:2]]
 
     for combination in combinations:
         if len(set(combination)) == 1 and current_player in combination:
             return print_winner(current_player), exit(0)
-        elif len(set(combination)) >= 2 and not combination.__contains__(DEFAULT_SIGN):
-            while attempts == 8:
-                print 'There is no combinations to WIN'
-                return exit(0)
+            if len(set(combination)) >= 2 and DEFAULT_SIGN not in combination:
+                while attempts == 8:
+                    print 'There is no combinations to WIN'
+                    return exit(0)
 
 
 def main():
@@ -69,7 +70,7 @@ def main():
         print_board(board)
         attempts += 1
         while attempts >= 5:
-            get_winner(board, current_player)
+            get_winner(board, current_player, attempts)
             break
 
 
