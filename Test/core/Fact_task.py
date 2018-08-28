@@ -13,11 +13,12 @@ while True:
             '''Get Status Code'''
             actual_code = response.getcode()
             if actual_code == status_code:
-                '''Get Dictionary JSON'''
+                '''Get JSON Dictionary '''
                 values_string = json.loads(response.read())
                 '''Access to FACT value'''
+                message = values_string.get('message')
                 fact = values_string.get('data')[0].get('fact')
-                print fact
+                print "You %s:  %s" % (message, fact)
             else:
                 print "Recourse unavailable"
         except urllib2.HTTPError:
