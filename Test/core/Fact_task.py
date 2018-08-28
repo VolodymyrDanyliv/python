@@ -21,7 +21,7 @@ while True:
                 print "You %s:  %s" % (message, fact)
             else:
                 print "Recourse unavailable"
-        except urllib2.HTTPError:
+        except (urllib2.HTTPError, urllib2.URLError):
             choice = raw_input("Connection error occurred. Do you want to continue?: ")
             if choice.lower() == 'yes':
                 print ""
